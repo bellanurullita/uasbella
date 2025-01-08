@@ -60,7 +60,7 @@ const products = [
   },
   {
     id: 9,
-    name: 'HANASUI MATTEDORABLE LIP CREAM BOBAT Rp.30.500',
+    name: 'HANASUI MATEDORABLE LIP CREAM BOBAT Rp.30.500',
     imageUrl: 'https://hanasui.id/front-end/assets/img/product_image/e8bc9c71323f0464c07c023250d916a7.png',
   },
   {
