@@ -82,6 +82,49 @@ const HomeScreen = () => {
     }
   };
 
+  const reasons = [
+    {
+      id: 1,
+      title: 'Produk Berkualitas',
+      description:
+        'Hanasui menggunakan bahan-bahan berkualitas tinggi yang telah teruji secara klinis, sehingga memberikan hasil terbaik untuk kulit Anda.',
+      imageUrl:
+        'https://i0.wp.com/zaloraadmin.wpcomstaging.com/wp-content/uploads/2023/10/shade-cushion-hanasui.png?fit=1200%2C620&ssl=1',
+    },
+    {
+      id: 2,
+      title: 'Aman dan Halal',
+      description:
+        'Semua produk Hanasui telah tersertifikasi BPOM dan halal, memastikan keamanan dan kenyamanan pengguna.',
+      imageUrl:
+        'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj-K-LZXiGjZdlTLoZBC2IbO19zD2XCMJLuq7pQptUfYVAhgFbDRpIvp7xL8IPCHEy3O68bpqVFnvukg1gqLqT30WhsDMi6YWuD1b4pUq3j3ApTZqh-i3A1et17S0nVcF1hWy8AxAEPOEZa/s2000/Hanasui+Flawless+Glow+10.jpg',
+    },
+    {
+      id: 3,
+      title: 'Harga Terjangkau',
+      description:
+        'Kami menyediakan produk-produk berkualitas tinggi dengan harga yang ramah di kantong.',
+      imageUrl:
+        'https://www.beautyhaul.com/assets/uploads/HANASUI_FOUNDATION.jpg',
+    },
+    {
+      id: 4,
+      title: 'Cruelty-Free',
+      description:
+        'Hanasui mendukung konsep cruelty-free, sehingga produk kami tidak melibatkan hewan dalam pengujian.',
+      imageUrl:
+        'https://garuda.industry.co.id/uploads/berita/detail/58779.jpg',
+    },
+    {
+      id: 5,
+      title: 'Layanan Pelanggan Unggul',
+      description:
+        'Kami memberikan pelayanan yang ramah dan responsif untuk memenuhi kebutuhan pelanggan.',
+      imageUrl:
+        'https://image.popbela.com/content-images/post/20231102/db4197b89cf4c81613d8a900921f614c.jpg?width=1600&format=webp&w=1600',
+    },
+  ];
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView ref={scrollViewRef}>
@@ -130,6 +173,23 @@ const HomeScreen = () => {
                 <TouchableOpacity style={styles.orderButton}>
                   <Text style={styles.orderButtonText}>Pesan</Text>
                 </TouchableOpacity>
+              </View>
+            ))}
+          </View>
+        </View>
+
+        {/* Kenapa Pilih Kami Section */}
+        <View style={styles.whychooseusSection}>
+          <Text style={styles.sectionHeading}>Kenapa Pilih Kami?</Text>
+          <View style={styles.reasonsContainer}>
+            {reasons.map((reason) => (
+              <View key={reason.id} style={styles.reasonCard}>
+                <Image
+                  source={{ uri: reason.imageUrl }}
+                  style={styles.reasonImage}
+                />
+                <Text style={styles.reasonTitle}>{reason.title}</Text>
+                <Text style={styles.reasonDescription}>{reason.description}</Text>
               </View>
             ))}
           </View>
@@ -226,6 +286,73 @@ const AboutScreen = () => {
   );
 };
 
+const WhyChooseUsScreen = () => {
+  const reasons = [
+    {
+      id: 1,
+      title: 'Produk Berkualitas',
+      description:
+        'Hanasui menggunakan bahan-bahan berkualitas tinggi yang telah teruji secara klinis, sehingga memberikan hasil terbaik untuk kulit Anda.',
+      imageUrl:
+        'https://i0.wp.com/zaloraadmin.wpcomstaging.com/wp-content/uploads/2023/10/shade-cushion-hanasui.png?fit=1200%2C620&ssl=1',
+    },
+    {
+      id: 2,
+      title: 'Aman dan Halal',
+      description:
+        'Semua produk Hanasui telah tersertifikasi BPOM dan halal, memastikan keamanan dan kenyamanan pengguna.',
+      imageUrl:
+        'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj-K-LZXiGjZdlTLoZBC2IbO19zD2XCMJLuq7pQptUfYVAhgFbDRpIvp7xL8IPCHEy3O68bpqVFnvukg1gqLqT30WhsDMi6YWuD1b4pUq3j3ApTZqh-i3A1et17S0nVcF1hWy8AxAEPOEZa/s2000/Hanasui+Flawless+Glow+10.jpg',
+    },
+    {
+      id: 3,
+      title: 'Harga Terjangkau',
+      description:
+        'Kami menyediakan produk-produk berkualitas tinggi dengan harga yang ramah di kantong.',
+      imageUrl:
+        'https://www.beautyhaul.com/assets/uploads/HANASUI_FOUNDATION.jpg',
+    },
+    {
+      id: 4,
+      title: 'Cruelty-Free',
+      description:
+        'Hanasui mendukung konsep cruelty-free, sehingga produk kami tidak melibatkan hewan dalam pengujian.',
+      imageUrl:
+        'https://garuda.industry.co.id/uploads/berita/detail/58779.jpg',
+    },
+    {
+      id: 5,
+      title: 'Layanan Pelanggan Unggul',
+      description:
+        'Kami memberikan pelayanan yang ramah dan responsif untuk memenuhi kebutuhan pelanggan.',
+      imageUrl:
+        'https://image.popbela.com/content-images/post/20231102/db4197b89cf4c81613d8a900921f614c.jpg?width=1600&format=webp&w=1600',
+    },
+  ];
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+        <View style={styles.sectionHeader}>
+          <Text style={styles.heading}>Kenapa Pilih Kami?</Text>
+        </View>
+        <View style={styles.reasonsContainer}>
+          {reasons.map((reason) => (
+            <View key={reason.id} style={styles.reasonCard}>
+              <Image
+                source={{ uri: reason.imageUrl }}
+                style={styles.reasonImage}
+              />
+              <Text style={styles.reasonTitle}>{reason.title}</Text>
+              <Text style={styles.reasonDescription}>{reason.description}</Text>
+            </View>
+          ))}
+        </View>
+        <Footer />
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
 const ProductsScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
@@ -296,6 +423,7 @@ const App = () => {
         <Drawer.Screen name="Beranda" component={HomeScreen} />
         <Drawer.Screen name="Tentang Kami" component={AboutScreen} />
         <Drawer.Screen name="Produk" component={ProductsScreen} />
+        <Drawer.Screen name="Kenapa Pilih Kami" component={WhyChooseUsScreen} />
         <Drawer.Screen name="Hubungi Kami" component={ContactScreen} />
       </Drawer.Navigator>
     
@@ -369,6 +497,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     resizeMode: 'contain',
   },
+  heading: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#fff',
+  },
   productContent: {
     flexDirection: 'row' as const,
     justifyContent: 'space-between',
@@ -379,6 +512,11 @@ const styles = StyleSheet.create({
     color: '#fff', 
     marginVertical: 8, 
     textAlign: 'center' 
+  },
+  sectionHeader: {
+    paddingVertical: 20,
+    alignItems: 'center',
+    backgroundColor: '#FFC0CB',
   },
   heroParagraph: { 
     color: '#fff', 
@@ -580,6 +718,47 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     resizeMode: 'contain',
+  },
+  whychooseusSection: {
+    padding: 20,
+    alignItems: 'center',
+  },
+  whyUsText: {
+    fontSize: 16,
+    color: '#555',
+    marginVertical: 5,
+  },
+  reasonsContainer: {
+    padding: 15,
+  },
+  reasonCard: {
+    backgroundColor: '#fff',
+    marginBottom: 15,
+    padding: 15,
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 2,
+  },
+  reasonImage: {
+    width: '100%',
+    height: 120,
+    borderRadius: 10,
+    marginBottom: 10,
+    resizeMode: 'cover',
+  },
+  reasonTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 8,
+  },
+  reasonDescription: {
+    fontSize: 14,
+    color: '#666',
+    lineHeight: 20,
   },
 });
 
