@@ -1,74 +1,587 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import React from 'react';
+import {
+  SafeAreaView,
+  ScrollView,
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  TextInput,
+  StyleSheet,
+  Linking,
+} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import  { useRef } from 'react';
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
 
-export default function HomeScreen() {
+const Drawer = createDrawerNavigator();
+
+const products = [
+  {
+    id: 1,
+    name: 'HANASUI PERFECT CHEEK BLUSH & GO PINK Rp.35.500',
+    imageUrl: 'https://hanasui.id/front-end/assets/img/product_image/2e86463249e54f6e3a86c0f115ee1f29.png',
+  },
+  {
+    id: 2,
+    name: 'HANASUI ACNE TREATMENT SERIES Rp.140.000',
+    imageUrl: 'https://hanasui.id/front-end/assets/img/product_image/d5b75a2c220ecd24b512f0809f1088db.png',
+  },
+  {
+    id: 3,
+    name: 'HANASUI FLAWLESS GLOW 10 SERIES Rp.105.000',
+    imageUrl: 'https://hanasui.id/front-end/assets/img/product_image/529593921fedabc102167ac588ce690b.png',
+  },
+  {
+    id: 4,
+    name: 'HANASUI POWER  BRIGHTEXPERT SERUM Rp.28.000',
+    imageUrl: 'https://hanasui.id/front-end/assets/img/product_image/24eb7beac8b22a6325ecc9324db0eb1e.png',
+  },
+  {
+    id: 5,
+    name: 'HANASUI COLLAGEN WATER SUNSCREEN Rp.40.500',
+    imageUrl: 'https://hanasui.id/front-end/assets/img/product_image/74afdc37b497e3f7bb227e7fe8f32af8.png',
+  },
+  {
+    id: 6,
+    name: 'Hanasui Serum Cushion Rp.76.500',
+    imageUrl: 'https://hanasui.id/front-end/assets/img/product_image/d8d7f7ed1914585cef1a77a7fc4bcc68.png',
+  },
+  {
+    id: 7,
+    name: 'HANASUI PERFECT FIT SETTING POWDER Rp.40.500',
+    imageUrl: 'https://hanasui.id/front-end/assets/img/product_image/uWcy7sLukWsGXVswbrBJfmlTnrX6mLuBTZobLpXJ.png',
+  },
+  {
+    id: 8,
+    name: 'HANASUI MATTEDORABLE LIP CREAM Rp.30.500',
+    imageUrl: 'https://hanasui.id/front-end/assets/img/product_image/bf83c7d933d5f63108fb3b2c327f8cf3.png',
+  },
+  {
+    id: 9,
+    name: 'HANASUI MATTEDORABLE LIP CREAM BOBAT Rp.30.500',
+    imageUrl: 'https://hanasui.id/front-end/assets/img/product_image/e8bc9c71323f0464c07c023250d916a7.png',
+  },
+  {
+    id: 10,
+    name: 'HANASUI LIP SLEEPING SERUM Rp.27.500',
+    imageUrl: 'https://hanasui.id/front-end/assets/img/product_image/PIz5Y9itloAZOlxa8K1hk7AhkxMpq40QJvJts8Xj.png',
+  },
+];
+
+const HomeScreen = () => {
+  const scrollViewRef = useRef<ScrollView>(null);
+
+  const scrollToProducts = () => {
+    if (scrollViewRef.current) {
+      scrollViewRef.current.scrollTo({
+        y: 500, // Ganti nilai ini dengan posisi bagian produk
+        animated: true,
+      });
+    }
+  };
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <SafeAreaView style={styles.container}>
+      <ScrollView ref={scrollViewRef}>
+        {/* Hero Section */}
+        <View style={styles.heroSection}>
+          <Image
+            source={{
+              uri: 'https://media.suara.com/pictures/653x366/2023/02/17/22796-ragam-produk-hanasui.jpg',
+            }}
+            style={styles.heroImage}
+          />
+          <Text style={styles.heroHeading}>HANASUI OFFICIAL SHOP</Text>
+          <Text style={styles.heroParagraph}>
+            Temukan produk terbaik dengan harga terjangkau.
+          </Text>
+          <TouchableOpacity style={styles.heroButton} onPress={scrollToProducts}>
+            <Text style={styles.heroButtonText}>Lihat Produk</Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* Tentang Kami Section */}
+        <View style={styles.aboutSection}>
+          <Text style={styles.sectionHeading}>Tentang Kami</Text>
+          <Image
+            source={{ uri: 'https://avatars.githubusercontent.com/u/170111971?v=4' }}
+            style={styles.profileImage}
+          />
+          <Text style={styles.aboutText}>Nama: Bella Nurullita</Text>
+          <Text style={styles.aboutText}>NIM: 222303004</Text>
+          <Text style={styles.aboutText}>
+            Alamat: Jl. Cempaka Putih No24 Jakarta Pusat, Indonesia
+          </Text>
+          <Text style={styles.aboutText}>
+            Hanasui adalah merek kosmetik lokal yang memproduksi produk perawatan wajah, tubuh, dan rambut. Produk-produk Hanasui diklaim aman, halal, dan sudah tersertifikasi BPOM. Hanasui juga mengusung konsep cruelty free, sehingga tidak melibatkan hewan dalam proses pengujian produknya.
+          </Text>
+        </View>
+
+        {/* Produk Kami Section */}
+        <View style={styles.productsSection}>
+          <Text style={styles.sectionHeading}>Produk Kami</Text>
+          <View style={styles.productGrid}>
+            {products.map((product) => (
+              <View key={product.id} style={styles.productCardGrid}>
+                <Image source={{ uri: product.imageUrl }} style={styles.productImage} />
+                <Text style={styles.productName}>{product.name}</Text>
+                <TouchableOpacity style={styles.orderButton}>
+                  <Text style={styles.orderButtonText}>Pesan</Text>
+                </TouchableOpacity>
+              </View>
+            ))}
+          </View>
+        </View>
+
+        {/* Hubungi Kami Section */}
+        <View style={styles.contactSection}>
+          <Text style={styles.sectionHeading}>Hubungi Kami</Text>
+          <TextInput placeholder="Nama" style={styles.input} />
+          <TextInput placeholder="Email" style={styles.input} />
+          <TextInput
+            placeholder="Pesan"
+            style={[styles.input, styles.messageInput]}
+            multiline
+          />
+          <TouchableOpacity style={styles.contactButton}>
+            <Text style={styles.contactButtonText}>Kirim</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.whatsappButton}
+            onPress={() => {
+              const phoneNumber = '628123456789';
+              const url = `https://wa.me/${phoneNumber}`;
+              Linking.openURL(url);
+            }}
+          >
+            <Image
+              source={{
+                uri: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg',
+              }}
+              style={styles.whatsappIcon}
+            />
+            <Text style={styles.whatsappText}>Hubungi Kami di WhatsApp</Text>
+          </TouchableOpacity>
+        </View>
+        <Footer />
+      </ScrollView>
+    </SafeAreaView>
   );
-}
+};
+
+
+const AboutScreen = () => {
+  return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+        {/* Tentang Kami */}
+        <View style={styles.aboutSection}>
+          <Text style={styles.sectionHeading}>Tentang Kami</Text>
+          <Image
+            source={{ uri: 'https://avatars.githubusercontent.com/u/170111971?v=4' }}
+            style={styles.profileImage}
+          />
+          <Text style={styles.aboutText}>Nama: Bella Nurullita</Text>
+          <Text style={styles.aboutText}>NIM: 222303004</Text>
+          <Text style={styles.aboutText}>
+            Alamat: Jl. Cempaka Putih No24 Jakarta Pusat, Indonesia
+          </Text>
+        </View>
+
+        {/* Tentang Produk */}
+        <View style={styles.aboutProductSection}>
+          <Text style={styles.sectionHeading}>Tentang Produk</Text>
+          <View style={styles.productContent}>
+            {/* Foto Produk */}
+            
+            {/* Deskripsi Produk */}
+            <Text style={styles.aboutDescription}>
+              Hanasui adalah merek kosmetik lokal yang memproduksi produk perawatan wajah, tubuh, dan rambut. Produk-produk Hanasui diklaim aman, halal, dan sudah tersertifikasi BPOM. Hanasui juga mengusung konsep cruelty free, sehingga tidak melibatkan hewan dalam proses pengujian produknya.
+            </Text>
+          </View>
+        </View>
+
+        {/* Visi Misi */}
+        <View style={styles.visionMissionSection}>
+          <Text style={styles.sectionHeading}>Hanasui Official Shop</Text>
+          <Text style={styles.visionText}>
+            <Text style={{ fontWeight: 'bold' }}>Visi: </Text>
+            {'\n'}
+            Menjadi merek kosmetik lokal yang terpercaya dan terkemuka di Indonesia, yang memberikan produk berkualitas tinggi, aman, halal, dan inovatif untuk mempercantik setiap individu, serta mendukung keberlanjutan lingkungan melalui praktik bisnis yang ramah lingkungan.</Text>
+          <Text style={styles.missionText}>
+            <Text style={{ fontWeight: 'bold' }}>Misi: </Text>
+            {'\n'}
+            1. Memberikan Produk Berkualitas Menghadirkan produk kosmetik yang aman, halal, dan tersertifikasi BPOM untuk memenuhi kebutuhan perawatan kulit, tubuh, dan kecantikan konsumen. {'\n'}
+            2. Inovasi Berkelanjutan Mengembangkan produk kosmetik yang berbasis pada penelitian dan teknologi terkini, dengan tetap mempertahankan prinsip ramah lingkungan dan cruelty-free. {'\n'}
+            3. Mendukung Kepercayaan Diri Membantu pelanggan untuk tampil percaya diri melalui produk kecantikan yang terjangkau dan sesuai dengan kebutuhan pasar lokal maupun global. {'\n'}
+            4. Pelayanan Konsumen Unggul Memberikan pelayanan yang cepat, ramah, dan memuaskan untuk menciptakan pengalaman belanja yang menyenangkan bagi konsumen. {'\n'}
+            5. Pemberdayaan Lokal Berkontribusi pada pengembangan ekonomi lokal dengan memberdayakan tenaga kerja dan bahan baku lokal, serta mendukung komunitas melalui program sosial dan edukasi.
+          </Text>
+        </View>
+        <Footer />
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
+
+const ProductsScreen = () => {
+  return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+        <View style={styles.productsSection}>
+          <Text style={styles.sectionHeading}>Produk Kami</Text>
+          <View style={styles.productGrid}>
+            {products.map((product) => (
+              <View key={product.id} style={styles.productCardGrid}>
+                <Image source={{ uri: product.imageUrl }} style={styles.productImage} />
+                <Text style={styles.productName}>{product.name}</Text>
+                <TouchableOpacity style={styles.orderButton}>
+                  <Text style={styles.orderButtonText}>Pesan</Text>
+                </TouchableOpacity>
+              </View>
+            ))}
+          </View>
+        </View>
+        <Footer />
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
+
+const ContactScreen = () => {
+  return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+        <View style={styles.contactSection}>
+          <Text style={styles.sectionHeading}>Hubungi Kami</Text>
+          <TextInput placeholder="Nama" style={styles.input} />
+          <TextInput placeholder="Email" style={styles.input} />
+          <TextInput
+            placeholder="Pesan"
+            style={[styles.input, styles.messageInput]}
+            multiline
+          />
+          <TouchableOpacity style={styles.contactButton}>
+            <Text style={styles.contactButtonText}>Kirim</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.whatsappButton}
+            onPress={() => {
+              const phoneNumber = '628123456789';
+              const url = `https://wa.me/${phoneNumber}`;
+              Linking.openURL(url);
+            }}
+          >
+            <Image
+              source={{
+                uri: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg',
+              }}
+              style={styles.whatsappIcon}
+            />
+            <Text style={styles.whatsappText}>Hubungi Kami di WhatsApp</Text>
+          </TouchableOpacity>
+        </View>
+        <Footer />
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
+
+const App = () => {
+  return (
+    
+      <Drawer.Navigator initialRouteName="Beranda">
+        <Drawer.Screen name="Beranda" component={HomeScreen} />
+        <Drawer.Screen name="Tentang Kami" component={AboutScreen} />
+        <Drawer.Screen name="Produk" component={ProductsScreen} />
+        <Drawer.Screen name="Hubungi Kami" component={ContactScreen} />
+      </Drawer.Navigator>
+    
+  );
+};
+const Footer = () => {
+  return (
+    <View style={styles.footer}>
+      <Text style={styles.title}>Where to Buy?</Text>
+      <View style={styles.iconContainer}>
+        <TouchableOpacity
+          onPress={() => Linking.openURL('https://wa.me/628123456789')}
+          style={styles.footerIconContainer}
+        >
+          <Image
+            source={{
+              uri: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg',
+            }}
+            style={styles.footerIcon}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => Linking.openURL('https://shopee.co.id')}
+          style={styles.footerIconContainer}
+        >
+          <Image
+            source={{
+              uri: 'https://4.bp.blogspot.com/-g2LxbmLtmRc/Xgrl4p_uUSI/AAAAAAAABPg/HxSuSth-BxEFB9AJbvr6mCrXtkg35cjMwCLcBGAsYHQ/s1600/shopee%2B2.png',
+            }}
+            style={styles.footerIcon}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => Linking.openURL('https://www.tokopedia.com')}
+          style={styles.footerIconContainer}
+        >
+          <Image
+            source={{
+              uri: 'https://www.akun.biz/tips-bisnis/wp-content/uploads/2020/04/tokopedia-wishlist.jpg',
+            }}
+            style={styles.footerIcon}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => Linking.openURL('https://www.lazada.co.id')}
+          style={styles.footerIconContainer}
+        >
+          <Image
+            source={{
+              uri: 'https://s.viec.co/companies/149/logo.png?operation=crop&quality=100&width=1024&height=1024&version=1567595423',
+            }}
+            style={styles.footerIcon}
+          />
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-  titleContainer: {
+  container: { flex: 1, backgroundColor: '#f9f9f9' },
+  heroSection: { 
+    alignItems: 'center', 
+    paddingVertical: 25, 
+    paddingHorizontal: 15, 
+    backgroundColor: '#FFC0CB' 
+  },
+  heroImage: {
+    width: '90%',
+    height: 160,
+    borderRadius: 10,
+    resizeMode: 'contain',
+  },
+  productContent: {
+    flexDirection: 'row' as const,
+    justifyContent: 'space-between',
+    padding: 10,
+  },
+  heroHeading: { 
+    fontSize: 20, 
+    color: '#fff', 
+    marginVertical: 8, 
+    textAlign: 'center' 
+  },
+  heroParagraph: { 
+    color: '#fff', 
+    textAlign: 'center', 
+    fontSize: 14, 
+    marginBottom: 12 
+  },
+  heroButton: { 
+    backgroundColor: '#fff', 
+    paddingVertical: 10, 
+    paddingHorizontal: 15, 
+    borderRadius: 20 
+  },
+  heroButtonText: { 
+    color: '#4CAF50', 
+    fontSize: 14, 
+    fontWeight: 'bold' 
+  },
+  aboutSection: {
+    paddingVertical: 25,
+    paddingHorizontal: 15,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+  },
+  profileImage: {
+    width: 90,
+    height: 90,
+    borderRadius: 45,
+    marginVertical: 12,
+  },
+  aboutText: {
+    fontSize: 14,
+    color: '#333',
+    textAlign: 'center',
+    marginVertical: 8,
+  },
+  aboutProductSection: {
+    paddingVertical: 20,
+    paddingHorizontal: 15,
+    backgroundColor: '#f9f9f9',
+  },
+  aboutDescription: {
+    fontSize: 14,
+    color: '#333',
+    textAlign: 'justify',
+    lineHeight: 20,
+  },
+  videoSection: {
+    paddingVertical: 20,
+    paddingHorizontal: 10,
+    alignItems: 'center',
+  },
+  videoPlayer: {
+    width: '100%',
+    height: 180,
+    borderRadius: 10,
+  },
+  visionMissionSection: {
+    paddingVertical: 25,
+    paddingHorizontal: 15,
+    backgroundColor: '#FFC0CB',
+    alignItems: 'center',
+  },
+  visionText: {
+    fontSize: 14,
+    color: '#fff',
+    marginVertical: 6,
+    textAlign: 'center',
+    lineHeight: 20,
+  },
+  missionText: {
+    fontSize: 14,
+    color: '#fff',
+    textAlign: 'center',
+    lineHeight: 20,
+  },
+  productsSection: { 
+    paddingVertical: 20, 
+    paddingHorizontal: 10 
+  },
+  sectionHeading: { 
+    fontSize: 20, 
+    marginBottom: 10, 
+    textAlign: 'center' 
+  },
+  productGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  productCardGrid: {
+    width: '48%',
+    marginBottom: 15,
+    alignItems: 'center',
+    backgroundColor: '#FFC0CB',
+    padding: 10,
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 2,
+    borderColor: '#FFC0CB',
+    borderWidth: 1,
+  },
+  productImage: { 
+    width: 120, 
+    height: 120, 
+    borderRadius: 10 
+  },
+  productName: { 
+    marginVertical: 5, 
+    fontSize: 12, 
+    textAlign: 'center', 
+    color: '#333' 
+  },
+  orderButton: { 
+    backgroundColor: '#fff', 
+    paddingVertical: 6, 
+    paddingHorizontal: 12, 
+    borderRadius: 5 
+  },
+  orderButtonText: { 
+    color: '#FFC0CB', 
+    fontSize: 12 
+  },
+  contactSection: { 
+    paddingVertical: 20, 
+    paddingHorizontal: 15 
+  },
+  input: {
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 8,
+    marginBottom: 12,
+    padding: 10,
+    fontSize: 14,
+  },
+  messageInput: { 
+    height: 90, 
+    textAlignVertical: 'top' 
+  },
+  contactButton: { 
+    backgroundColor: '#FFC0CB', 
+    paddingVertical: 10, 
+    borderRadius: 5 
+  },
+  contactButtonText: { 
+    color: '#fff', 
+    textAlign: 'center', 
+    fontSize: 14 
+  },
+  whatsappButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    marginTop: 10,
+    backgroundColor: '#25D366',
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 5,
   },
-  stepContainer: {
-    gap: 8,
+  whatsappIcon: {
+    width: 18,
+    height: 18,
+    marginRight: 8,
+  },
+  whatsappText: {
+    color: '#fff',
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+  footer: {
+    paddingVertical: 15,
+    paddingHorizontal: 15,
+    backgroundColor: '#FFC0CB',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderTopWidth: 1,
+    borderTopColor: '#f0f0f0',
+  },
+  title: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#333',
     marginBottom: 8,
+    textAlign: 'center',
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  iconContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 10,
+  },
+  footerIconContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 8,
+  },
+  footerIcon: {
+    width: 30,
+    height: 30,
+    resizeMode: 'contain',
   },
 });
+
+
+export default App;
